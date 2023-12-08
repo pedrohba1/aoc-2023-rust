@@ -40,74 +40,38 @@ fn compare_cards(new_cards: &str, existing_cards: &str) -> std::cmp::Ordering {
         Ordering::Greater
     } else if dupes_nc == dupes_ec {
         let result = untie(new_cards, existing_cards);
-        println!("ordering: {:?}", result);
         return result;
     } else {
-        println!("cards are equal");
-
         Ordering::Equal
     }
 }
 
-fn count_most_dupes(string: &str) -> (Option<char>, u32) {
+fn rank(string: &str) -> u32 {
     let mut count_map = HashMap::new();
 
     for c in string.chars() {
         *count_map.entry(c).or_insert(0) += 1;
     }
 
-    let mut dupes = 0;
-    let mut duped: Option<char> = None; // Use Option type to allow nil character
-    for (c, amount) in count_map {
-        if amount > dupes {
-            dupes = amount;
-            duped = Some(c);
-        }
-    }
-
-    return (duped, dupes);
-}
-
-fn rank(string: &str) -> u32 {
-    let mut rank;
-    let (c, dupes_amount) = count_most_dupes(string);
-
-    rank = dupes_amount;
-
-    println!("string: {:?} duped char: {:?} ", string, c);
-
-    if rank == 0 {
-        println!("high card {:?} ", string);
-    }
-    if rank == 1 {
-        println!("one pair {:?} ", string);
-    }
-    if rank == 2 {
-        println!("two pair {:?} ", string);
-    }
-
-    if dupes_amount == 3 {
-        let new_str = string.replace(c.unwrap(), "");
-        println!("new str after extracting dupes {:?} ", new_str);
-
-        if count_most_dupes(&new_str).1 == 2 {
-            rank = 4;
-            println!("full house {:?} ", string);
-        } else {
-            println!("three of a kind {:?} ", string);
-            rank = 3
-        }
-    }
-
-    if dupes_amount == 4 {
-        rank = 5;
-        println!("four of a kind {:?} ", string);
-    }
-    if dupes_amount == 5 {
-        rank = 6;
-        println!("five of a kind{:?} ", string);
-    }
-    return rank;
+    if count_map.values().any(|&val| val == 5) {
+        return 7;
+    };
+    if count_map.values().any(|&val| val == 4) {
+        return 6;
+    };
+    if count_map.values().any(|&val| val == 3) && count_map.values().any(|&val| val == 2) {
+        return 5;
+    };
+    if count_map.values().any(|&val| val == 3) && count_map.values().any(|&val| val != 2) {
+        return 4;
+    };
+    if count_map.values().filter(|&&val| val == 2).count() > 1 {
+        return 3;
+    };
+    if count_map.values().filter(|&&val| val == 2).count() == 1 {
+        return 2;
+    };
+    return 1;
 }
 
 fn convert_char(c: char) -> u32 {
@@ -130,14 +94,10 @@ fn untie(n_cards: &str, e_cards: &str) -> Ordering {
     // extract ascII characters
     let n_chars: Vec<char> = n_cards.chars().collect();
     let e_chars: Vec<char> = e_cards.chars().collect();
-    println!("comparing strings:");
-    println!("cards 1: {:?}, cards 2 {:?}", n_cards, e_cards);
 
     for (i, char) in n_chars.iter().enumerate() {
         let val1 = convert_char(char.to_owned());
         let val2 = convert_char(e_chars[i]);
-
-        println!("val1: {}, val2: {}", val1, val2);
 
         if val1 > val2 {
             return Ordering::Greater;
@@ -163,7 +123,7 @@ mod tests {
     //my solution so far: 245578416
     fn test_part_one() {
         let result = part_one(&advent_of_code::template::read_file("examples", DAY));
-        assert_eq!(result, None);
+        assert_eq!(result, Some(245794640));
     }
 
     #[test]
