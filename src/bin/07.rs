@@ -249,17 +249,14 @@ mod tests {
     use super::*;
 
     #[test]
-
-    //my solution so far: 245578416
     fn test_part_one() {
         let result = part_one(&advent_of_code::template::read_file("examples", DAY));
-        assert_eq!(result, Some(245794640));
+        assert_eq!(result, Some(6440));
     }
 
     #[test]
-    // mine so far: 247899149
     fn test_part_two() {
         let result = part_two(&advent_of_code::template::read_file("examples", DAY));
-        assert_ne!(result, Some(247923983));
+        assert_eq!(result, Some(5905));
     }
 }
