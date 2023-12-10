@@ -215,7 +215,6 @@ fn rank_pt2(cards: &str) -> u32 {
 
     // keep it after the loop
 
-    println!("hand: {:?}, rank: {}", cards, rank);
     return rank;
 }
 
