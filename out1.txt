@@ -1,0 +1,23 @@
+Part 1: [1m0[0mPart 1: [1m0[0m (5.0ms)
+node, Node { origin: "11A", l: "11B", r: "XXX" }
+i value: 0
+L move to: Node { origin: "11B", l: "XXX", r: "11Z" }
+node, Node { origin: "11B", l: "XXX", r: "11Z" }
+i value: 1
+R move to: Node { origin: "11Z", l: "11B", r: "XXX" }
+node, Node { origin: "11Z", l: "11B", r: "XXX" }
+Broke out in, Node { origin: "11Z", l: "11B", r: "XXX" }
+moves before resetting, 2
+node, Node { origin: "22A", l: "22B", r: "XXX" }
+i value: 0
+L move to: Node { origin: "22B", l: "22C", r: "22C" }
+node, Node { origin: "22B", l: "22C", r: "22C" }
+i value: 1
+R move to: Node { origin: "22C", l: "22Z", r: "22Z" }
+node, Node { origin: "22C", l: "22Z", r: "22Z" }
+i value: 0
+L move to: Node { origin: "22Z", l: "22B", r: "22B" }
+node, Node { origin: "22Z", l: "22B", r: "22B" }
+Broke out in, Node { origin: "22Z", l: "22B", r: "22B" }
+moves before resetting, 5
+Part 2: [1m5[0mPart 2: [1m5[0m (3.8ms)

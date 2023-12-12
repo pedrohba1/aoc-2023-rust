@@ -1,4 +1,4 @@
-use std::{collections::HashMap, ops::Index};
+use std::collections::HashMap;
 
 use regex::Regex;
 
@@ -24,7 +24,7 @@ impl Map {
         }
     }
     pub fn parse(&mut self, input: &str) {
-        let re = Regex::new(r"([A-Z])\w+").unwrap();
+        let re = Regex::new(r"\w+").unwrap();
 
         for (i, line) in input.lines().enumerate() {
             if i == 0 {
@@ -34,7 +34,6 @@ impl Map {
                 continue;
             }
             let m: Vec<_> = re.find_iter(line).map(|m| m.as_str()).collect();
-
             if m.len() > 0 {
                 let n = Node {
                     origin: m[0].to_string(),
@@ -77,7 +76,6 @@ pub fn part_one(input: &str) -> Option<u32> {
 }
 
 pub fn part_two(input: &str) -> Option<u32> {
-    let mut moves = 0;
     let mut map = Map::new();
     map.parse(input);
 
@@ -93,30 +91,32 @@ pub fn part_two(input: &str) -> Option<u32> {
 
     for current_node in start_nodes.iter() {
         let mut current_node = current_node.unwrap();
-        moves = 0;
-        println!("current_node, {:?}", current_node);
 
         loop {
             let node = current_node;
             println!("node, {:?}", node);
 
             let i = moves % map.dirs.len() as usize;
+
             if node.origin.chars().nth(2) == Some('Z') {
                 println!("Broke out in, {:?}", node);
-
                 break;
             }
+
+            println!("i value: {}", i);
             if map.dirs[i] == 'L' {
                 let next_node = map.nodes.get(&node.l as &str);
                 current_node = next_node.unwrap();
+                println!("L move to: {:?}", current_node);
             }
             if map.dirs[i] == 'R' {
-                let next_node = map.nodes.get(&node.l as &str);
+                let next_node = map.nodes.get(&node.r as &str);
                 current_node = next_node.unwrap();
+                println!("R move to: {:?}", current_node);
             }
             moves += 1;
         }
-        print!("moves before resetting, {}", moves);
+        println!("moves before resetting, {}", moves);
     }
     return Some(moves as u32);
 }
@@ -129,11 +129,20 @@ mod tests {
     fn test_part_one() {
         let result = part_one(&advent_of_code::template::read_file("examples", DAY));
         assert_eq!(result, Some(2));
+
+        let result = part_one(&advent_of_code::template::read_file_part(
+            "examples", DAY, 3,
+        ));
+
+        assert_eq!(result, Some(6));
     }
 
     #[test]
     fn test_part_two() {
-        let result = part_two(&advent_of_code::template::read_file("examples", DAY));
+        let result = part_two(&advent_of_code::template::read_file_part(
+            "examples", DAY, 2,
+        ));
+
         assert_eq!(result, None);
     }
 }
