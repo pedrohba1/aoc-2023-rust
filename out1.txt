@@ -1,4 +1,4 @@
-Part 1: [1m0[0mPart 1: [1m0[0m (5.0ms)
+Part 1: [1m0[0mPart 1: [1m0[0m (5.4ms)
 node, Node { origin: "11A", l: "11B", r: "XXX" }
 i value: 0
 L move to: Node { origin: "11B", l: "XXX", r: "11Z" }
@@ -20,4 +20,4 @@ L move to: Node { origin: "22Z", l: "22B", r: "22B" }
 node, Node { origin: "22Z", l: "22B", r: "22B" }
 Broke out in, Node { origin: "22Z", l: "22B", r: "22B" }
 moves before resetting, 5
-Part 2: [1m5[0mPart 2: [1m5[0m (3.8ms)
+Part 2: [1m5[0mPart 2: [1m5[0m (4.0ms)

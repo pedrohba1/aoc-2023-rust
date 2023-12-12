@@ -1,6 +1,5 @@
-use std::collections::HashMap;
-
 use regex::Regex;
+use std::collections::HashMap;
 
 advent_of_code::solution!(8);
 
@@ -14,6 +13,30 @@ struct Node {
 struct Map {
     dirs: Vec<char>,
     nodes: HashMap<String, Node>,
+}
+
+fn lcm(first: usize, second: usize) -> usize {
+    first * second / gcd(first, second)
+}
+
+fn gcd(first: usize, second: usize) -> usize {
+    let mut max = first;
+    let mut min = second;
+    if min > max {
+        let val = max;
+        max = min;
+        min = val;
+    }
+
+    loop {
+        let res = max % min;
+        if res == 0 {
+            return min;
+        }
+
+        max = min;
+        min = res;
+    }
 }
 
 impl Map {
@@ -75,7 +98,7 @@ pub fn part_one(input: &str) -> Option<u32> {
     return Some(moves as u32);
 }
 
-pub fn part_two(input: &str) -> Option<u32> {
+pub fn part_two(input: &str) -> Option<u64> {
     let mut map = Map::new();
     map.parse(input);
 
@@ -87,38 +110,38 @@ pub fn part_two(input: &str) -> Option<u32> {
             start_nodes.push(map.nodes.get(key));
         }
     }
-    let mut moves = 0;
+    let mut move_list: Vec<u64> = Vec::new();
 
-    for current_node in start_nodes.iter() {
+    for (_, current_node) in start_nodes.iter().enumerate() {
         let mut current_node = current_node.unwrap();
-
+        let mut moves = 0;
         loop {
             let node = current_node;
-            println!("node, {:?}", node);
 
-            let i = moves % map.dirs.len() as usize;
+            let i = moves % map.dirs.len() as u64;
 
             if node.origin.chars().nth(2) == Some('Z') {
-                println!("Broke out in, {:?}", node);
                 break;
             }
-
-            println!("i value: {}", i);
-            if map.dirs[i] == 'L' {
+            moves += 1;
+            if map.dirs[i as usize] == 'L' {
                 let next_node = map.nodes.get(&node.l as &str);
                 current_node = next_node.unwrap();
-                println!("L move to: {:?}", current_node);
             }
-            if map.dirs[i] == 'R' {
+            if map.dirs[i as usize] == 'R' {
                 let next_node = map.nodes.get(&node.r as &str);
                 current_node = next_node.unwrap();
-                println!("R move to: {:?}", current_node);
             }
-            moves += 1;
         }
-        println!("moves before resetting, {}", moves);
+        move_list.push(moves);
     }
-    return Some(moves as u32);
+
+    let mut acc = move_list[0] as usize;
+    for i in 1..move_list.len() {
+        acc = lcm(move_list[i] as usize, acc as usize);
+    }
+
+    return Some(acc as u64);
 }
 
 #[cfg(test)]
@@ -143,6 +166,6 @@ mod tests {
             "examples", DAY, 2,
         ));
 
-        assert_eq!(result, None);
+        assert_eq!(result, Some(6));
     }
 }
