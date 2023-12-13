@@ -56,7 +56,10 @@ impl Map {
                 }
                 continue;
             }
-            let m: Vec<_> = re.find_iter(line).map(|m| m.as_str()).collect();
+            let m: Vec<_> = re
+                .find_iter(line)
+                .map(|m: regex::Match<'_>| m.as_str())
+                .collect();
             if m.len() > 0 {
                 let n = Node {
                     origin: m[0].to_string(),
