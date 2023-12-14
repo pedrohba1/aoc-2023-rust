@@ -104,11 +104,8 @@ pub fn part_one(input: &str) -> Option<u32> {
 pub fn part_two(input: &str) -> Option<u64> {
     let mut map = Map::new();
     map.parse(input);
-
     let mut start_nodes = Vec::new();
     for key in map.nodes.keys() {
-        // access the key here
-
         if key.chars().nth(2) == Some('A') {
             start_nodes.push(map.nodes.get(key));
         }
@@ -138,12 +135,10 @@ pub fn part_two(input: &str) -> Option<u64> {
         }
         move_list.push(moves);
     }
-
     let mut acc = move_list[0] as usize;
     for i in 1..move_list.len() {
         acc = lcm(move_list[i] as usize, acc as usize);
     }
-
     return Some(acc as u64);
 }
 

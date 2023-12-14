@@ -82,10 +82,7 @@ fn untie(n_cards: &str, e_cards: &str) -> Ordering {
     Ordering::Equal
 }
 
-// this function receives the entire input from the file
-// and is supposed to return only the result
 pub fn part_one(input: &str) -> Option<u32> {
-    // these are tuples, containing a duple of (card, bid) in the first value
     let mut hands: Vec<(&str, u32)> = Vec::new();
 
     for line in input.lines() {

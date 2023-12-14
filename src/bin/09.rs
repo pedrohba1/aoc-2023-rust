@@ -29,26 +29,21 @@ pub fn part_one(input: &str) -> Option<i32> {
         let mut aux = diffs;
         'outer: loop {
             last_list.push_front(aux[aux.len() - 1]);
-
             let mut next_aux = VecDeque::new();
-
             for i in 1..aux.len() {
                 let (i1, i2) = (aux[i - 1], aux[i]);
                 next_aux.push_back(i2 - i1);
             }
-
             // check if all values in the array are zero. If so, break the loop, use that
             if next_aux.iter().all(|&x| x == 0) {
                 break 'outer;
             }
-
             // continue until the list gets to 0
             aux = next_aux;
         }
 
         acc += last_list.iter().sum::<i32>();
     }
-
     Some(acc)
 }
 
