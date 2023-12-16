@@ -8,14 +8,14 @@ struct Map {
     w: usize,
 }
 
-#[derive(Hash, Eq, PartialEq, Debug)]
+#[derive(Hash, Eq, PartialEq, Debug, Clone, Copy)]
 struct Key {
     x: usize,
     y: usize,
 }
 
 impl Map {
-    fn expand(&mut self) {
+    fn expand(&mut self, multipler: u32) {
         let mut new_rows = HashSet::new();
         let mut new_cols = HashSet::new();
 
@@ -38,13 +38,11 @@ impl Map {
         let mut new_map: HashMap<Key, char> = HashMap::new();
         let mut lk_x = 0;
         let mut lk_y = 0;
-        println!("new cols: {:?}", new_cols);
 
         for y in 0..self.h {
             for x in 0..self.w {
                 let key = Key { x, y };
                 let character = self.data.get(&key).unwrap_or(&'N');
-                print!("{}", character);
 
                 new_map.insert(
                     Key {
@@ -65,7 +63,6 @@ impl Map {
                     );
                 }
             }
-            println!("");
             lk_x = 0;
             if new_rows.contains(&y) {
                 lk_y += 1;
@@ -91,6 +88,32 @@ impl Map {
             }
             println!(); // New line at the end of each row
         }
+    }
+
+    fn sum_distances(&self) -> u32 {
+        let mut acc = 0;
+        // find all positions of #
+
+        // compare each position the all the others,
+        let mut pos: HashMap<u32, Key> = HashMap::new();
+
+        let mut pos_count = 1;
+        for (key, val) in self.data.iter() {
+            if val == &'#' {
+                pos.insert(pos_count, *key);
+                pos_count += 1;
+            }
+        }
+
+        for (_, val1) in pos.iter() {
+            for (_, val2) in pos.iter() {
+                acc +=
+                    (val2.x as i32 - val1.x as i32).abs() + (val2.y as i32 - val1.y as i32).abs();
+            }
+        }
+
+        // summ all the distances in accumulator
+        acc as u32 / 2
     }
 }
 
@@ -122,20 +145,17 @@ fn parse(input: &str) -> (Map) {
 pub fn part_one(input: &str) -> Option<u32> {
     let mut map = parse(input);
     // exapnd the matrix
-    map.expand();
+    map.expand(1);
 
-    println!("new map");
-    map.print();
-    // get all # as numbers, mapping each
-    // number as a key of a map
-
-    // calcualte manhattan distance betwwen each and all of them.
-
-    None
+    Some(map.sum_distances())
 }
 
 pub fn part_two(input: &str) -> Option<u32> {
-    None
+    let mut map = parse(input);
+    // exapnd the matrix
+    map.expand(1);
+
+    Some(map.sum_distances())
 }
 
 #[cfg(test)]
@@ -145,12 +165,12 @@ mod tests {
     #[test]
     fn test_part_one() {
         let result = part_one(&advent_of_code::template::read_file("examples", DAY));
-        assert_eq!(result, None);
+        assert_eq!(result, Some(374));
     }
 
     #[test]
     fn test_part_two() {
         let result = part_two(&advent_of_code::template::read_file("examples", DAY));
-        assert_eq!(result, None);
+        assert_eq!(result, Some(8410));
     }
 }

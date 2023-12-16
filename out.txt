@@ -7,7 +7,7 @@ successes:
 
 ---- tests::test_part_one stdout ----
 max w, 9 max_h, 9
-new cols: {8, 2, 5}
+new cols: {2, 5, 8}
 ...#......
 .......#..
 #.........
@@ -31,6 +31,7 @@ new map
 .............
 .........#...
 #....#.......
+ pos {7: Key { x: 12, y: 7 }, 4: Key { x: 5, y: 11 }, 2: Key { x: 9, y: 1 }, 6: Key { x: 8, y: 5 }, 5: Key { x: 0, y: 11 }, 3: Key { x: 0, y: 2 }, 8: Key { x: 1, y: 6 }, 9: Key { x: 9, y: 10 }, 1: Key { x: 4, y: 0 }}
 
 
 successes:
