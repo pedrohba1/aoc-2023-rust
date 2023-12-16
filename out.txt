@@ -1,43 +1,41 @@
-parsed point Point { tile: '.', distance: 0, x: 0, y: 0 }
-parsed point Point { tile: '.', distance: 0, x: 1, y: 0 }
-parsed point Point { tile: '.', distance: 0, x: 2, y: 0 }
-parsed point Point { tile: '.', distance: 0, x: 3, y: 0 }
-parsed point Point { tile: '.', distance: 0, x: 4, y: 0 }
-parsed point Point { tile: '.', distance: 0, x: 0, y: 1 }
-parsed point Point { tile: 'S', distance: 0, x: 1, y: 1 }
-parsed point Point { tile: '-', distance: 0, x: 2, y: 1 }
-parsed point Point { tile: '7', distance: 0, x: 3, y: 1 }
-parsed point Point { tile: '.', distance: 0, x: 4, y: 1 }
-parsed point Point { tile: '.', distance: 0, x: 0, y: 2 }
-parsed point Point { tile: '|', distance: 0, x: 1, y: 2 }
-parsed point Point { tile: '.', distance: 0, x: 2, y: 2 }
-parsed point Point { tile: '|', distance: 0, x: 3, y: 2 }
-parsed point Point { tile: '.', distance: 0, x: 4, y: 2 }
-parsed point Point { tile: '.', distance: 0, x: 0, y: 3 }
-parsed point Point { tile: 'L', distance: 0, x: 1, y: 3 }
-parsed point Point { tile: '-', distance: 0, x: 2, y: 3 }
-parsed point Point { tile: 'J', distance: 0, x: 3, y: 3 }
-parsed point Point { tile: '.', distance: 0, x: 4, y: 3 }
-parsed point Point { tile: '.', distance: 0, x: 0, y: 4 }
-parsed point Point { tile: '.', distance: 0, x: 1, y: 4 }
-parsed point Point { tile: '.', distance: 0, x: 2, y: 4 }
-parsed point Point { tile: '.', distance: 0, x: 3, y: 4 }
-parsed point Point { tile: '.', distance: 0, x: 4, y: 4 }
-visiting point: Point { tile: 'S', distance: 0, x: 1, y: 1 }
-available neighbors: [Point { tile: '|', distance: 0, x: 1, y: 2 }, Point { tile: '-', distance: 0, x: 2, y: 1 }]
-visiting point: Point { tile: '|', distance: 1, x: 1, y: 2 }
-available neighbors: [Point { tile: 'L', distance: 0, x: 1, y: 3 }]
-visiting point: Point { tile: '-', distance: 1, x: 2, y: 1 }
-available neighbors: [Point { tile: '7', distance: 0, x: 3, y: 1 }]
-visiting point: Point { tile: 'L', distance: 2, x: 1, y: 3 }
-available neighbors: [Point { tile: '-', distance: 0, x: 2, y: 3 }]
-visiting point: Point { tile: '7', distance: 2, x: 3, y: 1 }
-available neighbors: [Point { tile: '|', distance: 0, x: 3, y: 2 }]
-visiting point: Point { tile: '-', distance: 3, x: 2, y: 3 }
-available neighbors: [Point { tile: 'J', distance: 0, x: 3, y: 3 }]
-visiting point: Point { tile: '|', distance: 3, x: 3, y: 2 }
-available neighbors: []
-visiting point: Point { tile: 'J', distance: 4, x: 3, y: 3 }
-available neighbors: []
-Part 1: [1m4[0mPart 1: [1m4[0m (136.9µs)
-Part 2: ✖Part 2: ✖             
+
+running 2 tests
+test tests::test_part_two ... ok
+test tests::test_part_one ... ok
+
+successes:
+
+---- tests::test_part_one stdout ----
+max w, 9 max_h, 9
+new cols: {8, 2, 5}
+...#......
+.......#..
+#.........
+..........
+......#...
+.#........
+.........#
+..........
+.......#..
+#...#.....
+new map
+....#........
+.........#...
+#............
+.............
+.............
+........#....
+.#...........
+............#
+.............
+.............
+.........#...
+#....#.......
+
+
+successes:
+    tests::test_part_one
+    tests::test_part_two
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

@@ -37,6 +37,7 @@ impl Map {
         // expand rows
         let mut new_map: HashMap<Key, char> = HashMap::new();
         let mut lk_x = 0;
+        let mut lk_y = 0;
         println!("new cols: {:?}", new_cols);
 
         for y in 0..self.h {
@@ -45,15 +46,33 @@ impl Map {
                 let character = self.data.get(&key).unwrap_or(&'N');
                 print!("{}", character);
 
-                new_map.insert(Key { x: x + lk_x, y }, *character);
+                new_map.insert(
+                    Key {
+                        x: x + lk_x,
+                        y: y + lk_y,
+                    },
+                    *character,
+                );
 
                 if new_cols.contains(&x) {
                     lk_x += 1;
-                    new_map.insert(Key { x: x + lk_x, y }, '.');
+                    new_map.insert(
+                        Key {
+                            x: x + lk_x,
+                            y: y + lk_y,
+                        },
+                        '.',
+                    );
                 }
             }
             println!("");
             lk_x = 0;
+            if new_rows.contains(&y) {
+                lk_y += 1;
+                for x in 0..self.w + new_cols.len() {
+                    new_map.insert(Key { x: x, y: y + lk_y }, '.');
+                }
+            }
         }
 
         self.data = new_map;
