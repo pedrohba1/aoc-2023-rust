@@ -1,42 +1,69 @@
 
-running 2 tests
-test tests::test_part_two ... ok
-test tests::test_part_one ... ok
+running 1 test
+test tests::test_part_two ... FAILED
 
 successes:
 
----- tests::test_part_one stdout ----
+successes:
+
+failures:
+
+---- tests::test_part_two stdout ----
 max w, 9 max_h, 9
-new cols: {2, 5, 8}
-...#......
-.......#..
-#.........
-..........
-......#...
-.#........
-.........#
-..........
-.......#..
-#...#.....
-new map
-....#........
-.........#...
-#............
-.............
-.............
-........#....
-.#...........
-............#
-.............
-.............
-.........#...
-#....#.......
- pos {7: Key { x: 12, y: 7 }, 4: Key { x: 5, y: 11 }, 2: Key { x: 9, y: 1 }, 6: Key { x: 8, y: 5 }, 5: Key { x: 0, y: 11 }, 3: Key { x: 0, y: 2 }, 8: Key { x: 1, y: 6 }, 9: Key { x: 9, y: 10 }, 1: Key { x: 4, y: 0 }}
+...*#..*...*.
+...*...*.#.*.
+#..*...*...*.
+...*...*...*.
+*************
+...*...*#..*.
+.#.*...*...*.
+...*...*...*#
+...*...*...*.
+*************
+...*...*.#.*.
+#..*.#.*...*.
+val1  Key { x: 0, y: 2 } val 2Key { x: 12, y: 7 }
+expasion at Key { x: 7, y: 2 }
+expasion at Key { x: 12, y: 4 }
+expasion at Key { x: 11, y: 2 }
+expasion at Key { x: 3, y: 2 }
+val1  Key { x: 12, y: 7 } val 2Key { x: 0, y: 2 }
+expasion at Key { x: 7, y: 7 }
+expasion at Key { x: 3, y: 7 }
+expasion at Key { x: 0, y: 4 }
+expasion at Key { x: 11, y: 7 }
+val1  Key { x: 9, y: 10 } val 2Key { x: 0, y: 2 }
+expasion at Key { x: 7, y: 10 }
+expasion at Key { x: 3, y: 10 }
+expasion at Key { x: 0, y: 9 }
+expasion at Key { x: 0, y: 4 }
+val1  Key { x: 5, y: 11 } val 2Key { x: 0, y: 2 }
+expasion at Key { x: 0, y: 9 }
+expasion at Key { x: 3, y: 11 }
+expasion at Key { x: 0, y: 4 }
+val1  Key { x: 1, y: 6 } val 2Key { x: 0, y: 2 }
+expasion at Key { x: 0, y: 4 }
+val1  Key { x: 0, y: 11 } val 2Key { x: 0, y: 2 }
+expasion at Key { x: 0, y: 9 }
+expasion at Key { x: 0, y: 4 }
+val1  Key { x: 8, y: 5 } val 2Key { x: 0, y: 2 }
+expasion at Key { x: 0, y: 4 }
+expasion at Key { x: 3, y: 5 }
+expasion at Key { x: 7, y: 5 }
+val1  Key { x: 4, y: 0 } val 2Key { x: 0, y: 2 }
+expasion at Key { x: 3, y: 0 }
+val1  Key { x: 9, y: 1 } val 2Key { x: 0, y: 2 }
+expasion at Key { x: 7, y: 1 }
+expasion at Key { x: 3, y: 1 }
+thread 'tests::test_part_two' panicked at src/bin/11.rs:222:9:
+assertion `left == right` failed
+  left: Some(0)
+ right: Some(1030)
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
 
 
-successes:
-    tests::test_part_one
+failures:
     tests::test_part_two
 
-test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 1 filtered out; finished in 0.00s
 
